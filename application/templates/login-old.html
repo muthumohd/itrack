@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="row">
+    <div class="col-sm-8">
+		<h5><u>Application</u></h5>
+		<p align="justify">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porta eros eu tellus faucibus, et molestie odio pellentesque. Integer lacus purus, sodales at nulla id, vehicula posuere mi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent semper, mi vel finibus vulputate, neque mauris laoreet diam, ut viverra neque justo non neque. Nunc tempus congue risus sit amet iaculis. Cras eget augue orci. Phasellus faucibus massa auctor urna bibendum, non sagittis metus consequat. Nulla eget accumsan dolor, mollis ullamcorper tellus. Integer maximus lacus nec risus aliquam placerat. Maecenas sodales, eros quis interdum sodales, sapien velit consequat quam, non cursus diam ipsum interdum felis. Donec sed tempus felis. Proin pellentesque dictum arcu non aliquet. Nam bibendum interdum nunc eget vulputate.
+		</p>
+	</div>
+    <div class="col-sm-4">
+		<form action="{{ url_for('whdetails')  }}">
+		  <div class="form-group">
+			<label for="text">Username:</label>
+			<input type="text" class="form-control" id="username">
+		  </div>
+		  <div class="form-group">
+			<label for="pwd">Password:</label>
+			<input type="password" class="form-control" id="pwd">
+		  </div>
+		  <div class="checkbox">
+			<label><input type="checkbox"> Remember me</label>
+		  </div>
+		  <button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+  </div>
+    {% endblock %}

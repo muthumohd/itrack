@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>iTrack - Cargo IOT Project</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="/static/images/mdb-favicon.ico" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="/static/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/custom.css">
+  <link rel="icon"
+      type="image/ico"
+      href="/static/images/logo_R6K_icon.ico">
+
+  <!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark danger-color-dark">
+
+  <!-- Navbar brand -->
+  <a class="navbar-brand" href="{{ url_for('home')}}"><img src="/static/images/logo.png" alt="iTrack App" width="45">iTrack</a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+              <a class="nav-link" href="{{ url_for("whdetails", whname="CMT") }}"><i class="fas fa-warehouse"></i> Warehouse
+                  <span class="sr-only">(current)</span>
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ url_for("ulddetail", uldid="AKE123EK") }}"><i class="fas fa-box"></i> ULD Info</a>
+          </li>
+
+      </ul>
+      <!-- Links -->
+  </div>
+  <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+</head>
+<body class="d-flex flex-column">
+<!-- Start your project here-->  
+ <div id="page-content">
+<div class="container-fluid">
+	  <!--Grid row-->
+      <div class="row box">
+	  
+  <!--Grid column-->
+  <div class="offset-md-4 col-md-4 col-sm-12">
+  
+	<p class="lead">
+  <span class="badge info-color-dark p-2"> <i class="fas fa-warehouse"></i> Warehouse </span>
+
+<select class="mdb-select colorful-select dropdown-info warehouse">
+  <option value="0">Choose a warehouse</option>
+  <option value="1">Cargo Mega Terminal</option>
+  <option value="2">Garhoud Cargo Village</option>
+  <option value="3">Al Qouz Storage </option>
+  <option value="4">Flower Center</option>
+</select></p>
+
+    <!--Card-->
+    <div class="card">
+
+      <!--Card image-->
+      <div class="view overlay">
+        <img src="/static/images/SkyCargo.jpg" class="card-img-top" alt="">
+        
+      </div>
+
+      <!--Card content-->
+      <div class="card-body">
+        <!--Title-->
+        <h5 class="card-title">
+            {{Warehouse}}</h5></h6><p style="color:#546e7a"><em>Last Update: {{ Date }}</em></p>
+        <!--Text-->
+        <p class="card-text"><i class="fas fa-temperature-high fa-lg" style='color:darkred'></i><span>Temperature : <b>{{ Temperature }}<sup>o</sup> Celsius</span></p>
+          <p class="card-text"><i class="far fa-lightbulb fa-lg" style='color:darkred'></i><span>
+              Lights Status : <b>
+              {% if LightStatus %}
+                <i class="fas fa-check-square"></i>
+              {% else %}
+                <i class="fas fa-times"></i>
+              {% endif %}
+               </b> </span></p>
+      </div>
+
+    </div>
+    <!--/.Card-->
+
+  </div>
+  <!--Grid column-->
+
+	</div>
+	</div>
+	</div>
+  <!-- End your project here-->
+  <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+      <p>Copyright &copy; 2020 Emirates Group IT. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- jQuery -->
+  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="/static/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="/static/js/mdb.min.js"></script>
+  <!-- Your custom scripts (optional) -->
+  <script type="text/javascript"></script>
+	<script>
+	$(document).ready(function(){
+		$('.card').hide();
+		$("select.warehouse").change(function(){
+			var selectedULD = $(this).children("option:selected").val();
+			if(selectedULD=='1')				
+				$('.card').show();
+			else
+				$('.card').hide();
+		});
+	});
+	</script>
+</body>
+</html>

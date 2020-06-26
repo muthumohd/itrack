@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>iTrack - Cargo IOT Project</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="/static/images/mdb-favicon.ico" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="/static/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/custom.css">
+  <link rel="icon"
+      type="image/ico"
+      href="/static/images/logo_R6K_icon.ico">
+
+  <!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark danger-color-dark">
+
+  <!-- Navbar brand -->
+  <a class="navbar-brand" href="{{ url_for('home')}}"><img src="/static/images/logo.png" alt="iTrack App" width="45">iTrack</a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+              <a class="nav-link" href="{{ url_for("whdetails", whname="CMT") }}"><i class="fas fa-warehouse"></i> Warehouse
+                  <span class="sr-only">(current)</span>
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ url_for("ulddetail", uldid="AKE123EK") }}"><i class="fas fa-box"></i> ULD Info</a>
+          </li>
+
+      </ul>
+      <!-- Links -->
+  </div>
+  <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+</head>
+<body class="d-flex flex-column">
+<!-- Start your project here-->  
+ <div id="page-content">
+<div class="container-fluid">
+	  <!--Grid row-->
+      <div class="row box">
+	  
+  <!--Grid column-->
+  <div class="offset-md-4 col-md-4 col-sm-12">
+  
+	<p class="lead">
+  <span class="badge info-color-dark p-2"> <i class="fas fa-box"></i> ULD Unit </span>
+
+<select class="mdb-select colorful-select dropdown-info uld">
+  <option value="0">Choose a ULD</option>
+  <option value="1">AKE6666EK</option>
+  <option value="2">AKE123EK</option>
+  <option value="3">AKE9876EK</option>
+  <option value="4">AKE5432EK</option>
+</select></p>
+
+    <!--Card-->
+    <div class="card">
+
+      <!--Card image-->
+      <div class="view overlay">
+        <img src="/static/images/1-ld-cool-dolly_front.png" class="card-img-top" alt="">
+        
+      </div>
+
+{#         'title':uldid,#}
+{#        'UldId': x['uldid'],#}
+{#        'Temperature': x['temperature'],#}
+{#        'City': x['city'],#}
+{#        'Country': x['country'],#}
+{#        'Date':x['createddate'],#}
+{#        'Latitude':x['latitude'],#}
+{#        'Longitude':x['longitude']#}
+
+
+      <!--Card content-->
+      <div class="card-body">
+        <!--Title-->
+        <h6 style="margin-bottom:0px" class="card-title"><b>{{ UldId }}</b></h6><p style="color:#546e7a"><em>Last Update: {{ UldTime }}</em></p>
+        <!--Text-->
+        <p class="card-text"><i class="fas fa-temperature-high fa-lg" style='color:darkred'></i><span>Temperature : <b>{{ Temperature }}<sup>o</sup> Celsius</span></p>
+          <p class="card-text"><i class="fas fa-tint fa-lg" style='color:darkred'></i><span>Humidity : <b>{{ Humidity }}</span></p>
+		<p class="card-text"><i class="fas fa-truck-loading fa-lg" style='color:darkred'></i>
+			<span>Loaded : <b>
+				{% if Loaded %}
+					<i class="fas fa-check-square"></i>
+				{% else %}
+					<!-- i class="fas fa-times"></i> -->
+					<i class="fas fa-times-circle"></i>
+				{% endif %}
+				</span></p>
+          <p class="card-text"><i class="fas fa-map-marked-alt fa-lg" style='color:darkred'></i><span>Current Location : </span><a data-toggle="modal" data-target="#currentSatellite"><i style="color:#ff4444;" class="fas fa-map-marker-alt fa-lg"></i></a></p>
+		<p class="card-text">
+            <a  class="btn btn-outline-danger btn-rounded waves-effect" href="{{ url_for("history", uldid="AKE123EK", startdate="15-03-2020", enddate="17-03-2020") }}"><i class="fas fa-route fa-lg"></i>  ULD Path</a></p>
+      </div>
+
+    </div>
+    <!--/.Card-->
+<!--Modal: Name-->
+<div class="modal fade" id="modalSatellite" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Body-->
+      <div class="modal-body mb-0 p-0">
+
+        <!--Google map-->
+        <div id="map-container-google-17" class="z-depth-1-half map-container-10" style="height: 400px">
+          <iframe src="https://maps.google.com/maps?q=new%20york&t=k&z=13&ie=UTF8&iwloc=&output=embed"
+            frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+
+        <button type="button" class="btn btn-outline-default btn-md" data-dismiss="modal">Close <i class="fas fa-times ml-1"></i></button>
+
+      </div>
+
+    </div>
+    <!--/.Content-->
+
+  </div>
+</div>
+<!--Modal: Name-->
+<!--Modal: Name-->
+<div class="modal fade" id="currentSatellite" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Body-->
+      <div class="modal-body mb-0 p-0">
+
+        <!--Google map-->
+        <div id="map-container-google-17" class="z-depth-1-half map-container-10" style="height: 400px">
+          <iframe src="{{ MapApi }}"
+            frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+
+        <button type="button" class="btn btn-outline-default btn-md" data-dismiss="modal">Close <i class="fas fa-times ml-1"></i></button>
+
+      </div>
+
+    </div>
+    <!--/.Content-->
+
+  </div>
+</div>
+<!--Modal: Name-->
+  </div>
+  <!--Grid column-->
+
+	</div>
+	</div>
+	</div>
+	</div>
+  <!-- End your project here-->
+  <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+      <p>Copyright &copy; 2020 Emirates Group IT. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- jQuery -->
+  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="/static/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="/static/js/mdb.min.js"></script>
+  <!-- Your custom scripts (optional) -->
+  <script type="text/javascript"></script>
+	<script>
+	$(document).ready(function(){
+	$('.card').hide();
+		$("select.uld").change(function(){
+			var selectedULD = $(this).children("option:selected").val();
+			if(selectedULD=='2')				
+				$('.card').show();
+			else
+				$('.card').hide();
+		});
+	});
+	</script>
+</body>
+</html>
